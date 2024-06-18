@@ -56,4 +56,3 @@ for fastq in ${PATH_FASTQ}*R1.fastq.gz; do
   bwa mem -t ${THREADS} $REF ${PATH_FASTQ}${ID}_R1.fastq.gz ${PATH_FASTQ}${ID}_R2.fastq.gz -R "@RG\tID:${ID}\tSM:${ID}\tPL:ILLUMINA" | samtools view -F 0x04 -q ${QUAL} -bh -U ${OUTPUT_NOMAPPING}${ID}below_q${QUAL}.bam | samtools sort -o ${OUTPUT_MAPPING}${ID}.filt_sort.bam
 
 done
-
