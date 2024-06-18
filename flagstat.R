@@ -1,32 +1,8 @@
 
-setwd("/media/alexandre/Disque/Genomes/Mapping/")
-propmap <- read.csv("propmapped.csv", sep = "", header = T, dec = ".")
-depth <- read.csv("DP_MA.csv",  sep = "", header = T, dec = ".")
 
 library(ggplot2)
-
-PLOT <- plot(propmap$PROPORTION~propmap$ID)
-PLOT2 <- barplot(propmap$PROPORTION~propmap$ID)
-
-
-
-#### graphe sur données complètes 
-
-### Barplot du pourcentage de reads mappés sur la ref 
-
-test <- ggplot(data=propmap, aes(x=ID, y=PROPORTION)) +geom_bar(stat="identity", width=0.7)+ theme(legend.position="none") + 
-  geom_hline(yintercept=70, linetype="dashed", color = "red") +
-  ylab("percentage of read mapped") + xlab("Strains")+ ggtitle("proportion of mread mapped on GY11 by strains") + theme(plot.title = element_text(hjust = 1)) + 
-  ylim(0, 100) +
-  theme(plot.title = element_blank(),
-      
-      axis.text.x = element_text(color = "black", size = 7, face = "bold",angle = 90, hjust = ),
-      axis.title.x =element_text(color = "black", size = 13, face = "bold",angle = 0, hjust = ),
-      axis.text.y = element_text(color = "black", size = 15, face = "bold",angle = 0, hjust = ),
-      axis.title.y = element_text(color = "black", size = 15, face = "bold",angle = 90, hjust = )
-) 
-
-#### graphe sur la pop de Yule
+library(gridExtra)
+library(ggsave)
 
 propmapA <- read.csv("propmapped_final.csv", sep = ";", header = T, dec = ".")
 depthA <- read.csv("DP_MA_final.csv",  sep = ";", header = T, dec = ".")
@@ -100,11 +76,6 @@ test5  <- ggplot(data=depthA, aes(x=ID, y=breath_DP)) + geom_bar(stat="identity"
         axis.text.y = element_text(color = "black", size = 15, face = "bold",angle = 0, hjust = ),
         axis.title.y = element_text(color = "black", size = 15, face = "bold",angle = 90, hjust = )
   ) 
-
-#install.packages("gridExtra")
-library(gridExtra)
-
-
 
 bigtest <- grid.arrange(test2,test4,test3,test5,ncol=2, nrow = 2)
 
