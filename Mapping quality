@@ -102,6 +102,6 @@ paste <(printf %s "$ID") <(printf %s "$TOT")>>${OUTPUT}/QCResult/nbreads_tot.txt
 done
 
 paste ${OUTPUT}/QCResult/nbreads_mapped.txt ${OUTPUT}/QCResult/nbreads_tot.txt > ${OUTPUT}/QCResult/prop_mapped.txt
-echo -e "ID\tMAPPED_reads\tID\tTOT\tPROPORTION" > ${OUTPUT}/QCResult/prop_mapped2.txt
+echo -e "ID\tMAPPED_reads\tID\tTOT\tPROPORTION" > ${OUTPUT}/QCResult/propmapped_final.txt
 awk 'NR>1{PROPORTION = 100*$2/$4 ; print $1"\t"$2"\t"$3"\t"$4"\t"PROPORTION}' ${OUTPUT}/QCResult/prop_mapped.txt >> ${OUTPUT}/QCResult/propmapped_final.txt
 
