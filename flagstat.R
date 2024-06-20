@@ -1,5 +1,3 @@
-
-
 library(ggplot2)
 library(gridExtra)
 library(ggsave)
@@ -7,7 +5,7 @@ library(ggsave)
 propmapA <- read.csv("propmapped_final.csv", sep = ";", header = T, dec = ".")
 depthA <- read.csv("DP_MA_final.csv",  sep = ";", header = T, dec = ".")
 
-### Barplot du pourcentage de reads mappés sur la ref 
+### Percentage of mapped reads on the reference genome 
 
 test2 <- ggplot(data=propmapA, aes(x=ID, y=PROPORTION)) + geom_bar(stat="identity", width=0.7)+ theme(legend.position="none") + 
   geom_hline(yintercept=75, linetype="dashed", color = "red") +
@@ -27,7 +25,7 @@ test2 <- ggplot(data=propmapA, aes(x=ID, y=PROPORTION)) + geom_bar(stat="identit
     axis.text.y.right =element_blank() )
 
 
-### Barplot de la proportion de reads mappés par rapport au nombre de reads totals
+### Number of mapped reads (in blue) on total reads (in yellow)
 
 test3 <- ggplot(data=propmapA) +
   geom_bar(stat="identity", width=0.7, aes(x=ID, y=(TOT/1000000)), color="yellow", fill="yellow") + 
@@ -43,7 +41,7 @@ test3 <- ggplot(data=propmapA) +
   ) 
 
 
-### Barplot de la profondeur moyenne du nombre de read par souches
+### mean reads depth per isolates
 
 test4 <- ggplot(data=depthA, aes(x=ID, y=mean_read_DP)) + geom_bar(stat="identity", width=0.7)+ theme(legend.position="none") + 
   geom_hline(yintercept=63, linetype="dashed", color = "red") +
@@ -62,7 +60,7 @@ test4 <- ggplot(data=depthA, aes(x=ID, y=mean_read_DP)) + geom_bar(stat="identit
     axis.text.x = element_blank(),
     axis.text.y.right =element_blank() )
 
-### Barplot de la couverture sur le génome de ref
+### percentage covered on the reference genome 
 
 
 test5  <- ggplot(data=depthA, aes(x=ID, y=breath_DP)) + geom_bar(stat="identity", width=0.7)+ theme(legend.position="none") + 
@@ -79,4 +77,4 @@ test5  <- ggplot(data=depthA, aes(x=ID, y=breath_DP)) + geom_bar(stat="identity"
 
 bigtest <- grid.arrange(test2,test4,test3,test5,ncol=2, nrow = 2)
 
-ggsave(bigtest, file="/media/alexandre/Disque/Genomes/GWAS/GWAS_male/Figures/flag.svg", width=19, height=9, dpi = 600)
+ggsave(bigtest, file="flag.svg", width=19, height=9, dpi = 600)
